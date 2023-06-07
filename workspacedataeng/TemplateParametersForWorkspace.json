@@ -5,6 +5,9 @@
 		"workspaceName": {
 			"value": "workspacedataeng"
 		},
+		"lsSampleAppDB_connectionString": {
+			"value": ""
+		},
 		"lssamplestore01_accountKey": {
 			"value": ""
 		},
