@@ -1,5 +1,5 @@
 {
-	"name": "Copy-StorageAccount",
+	"name": "Copy - StorageAccount",
 	"properties": {
 		"activities": [
 			{
