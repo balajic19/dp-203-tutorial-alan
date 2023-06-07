@@ -1,0 +1,17 @@
+{
+	"name": "SQL Pool - Table - PolyBase",
+	"properties": {
+		"content": {
+			"query": "SELECT * FROM sys.database_scoped_credentials\n\nSELECT * FROM sys.external_data_sources\n\nSELECT * FROM sys.external_file_formats\n\n\nSELECT * FROM logdata_parquet\n\nSELECT * FROM pool_logdata_parquet\n\nDROP TABLE pool_logdata_parquet\n\nCREATE TABLE pool_logdata_parquet\nWITH(\n    DISTRIBUTION = ROUND_ROBIN\n)\nAS SELECT * FROM logdata_parquet",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "pooldb",
+				"poolName": "pooldb"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

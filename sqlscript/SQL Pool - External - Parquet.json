@@ -1,0 +1,17 @@
+{
+	"name": "SQL Pool - External - Parquet",
+	"properties": {
+		"content": {
+			"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Helloworld186#'\n\n--\n\nCREATE DATABASE SCOPED CREDENTIAL SasToken\nWITH IDENTITY = 'SHARED ACCESS SIGNATURE'\n, SECRET = 'sv=2022-11-02&ss=b&srt=sco&sp=rl&se=2023-06-30T22:27:15Z&st=2023-06-07T14:27:15Z&spr=https&sig=keiX9jRukX6sCQ6xz1yJqO9m0M6oJxQLWUEOaEO%2F0XI%3D'\n\n\n\nCREATE EXTERNAL DATA SOURCE log_data_parquet\nWITH(\n    LOCATION = 'https://samplestore01.blob.core.windows.net/parquet',\n    CREDENTIAL = SasToken)\n\nCREATE EXTERNAL FILE FORMAT ParquetFileFormat WITH(\n    FORMAT_TYPE=PARQUET,\n    DATA_COMPRESSION='org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n\nCREATE EXTERNAL TABLE [logdata_parquet]\n(\n    [Correlationid] [varchar](200) NULL,\n\t[Operationname] [varchar](200) NULL,\n\t[Status] [varchar](100) NULL,\n\t[Eventcategory] [varchar](100) NULL,\n\t[Level] [varchar](100) NULL,\n\t[Time] [varchar](200) NULL,\n\t[Subscription] [varchar](200) NULL,\n\t[Eventinitiatedby] [varchar](1000) NULL,\n\t[Resourcetype] [varchar](1000) NULL,\n\t[Resourcegroup] [varchar](1000) NULL,\n    [Resource] [varchar](2000) NULL)\nWITH (\n LOCATION = '/',\n    DATA_SOURCE = log_data_parquet,  \n    FILE_FORMAT = ParquetFileFormat\n)\n\n\nSELECT * FROM  [logdata_parquet]\n\nDROP EXTERNAL TABLE [logdata_parquet]\nDROP EXTERNAL DATA SOURCE log_data_parquet\nDROP EXTERNAL FILE FORMAT ParquetFileFormat\nDROP DATABASE SCOPED CREDENTIAL SasToken\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "pooldb",
+				"poolName": "pooldb"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

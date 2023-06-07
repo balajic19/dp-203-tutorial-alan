@@ -1,0 +1,17 @@
+{
+	"name": "OPENROWSET",
+	"properties": {
+		"content": {
+			"query": "SELECT * FROM OPENROWSET(\n    BULK 'https://samplestore01.blob.core.windows.net/parquet/*.parquet',\n    FORMAT='Parquet'\n) AS logtemp_data",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
